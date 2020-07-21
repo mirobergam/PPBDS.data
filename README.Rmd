@@ -2,9 +2,9 @@
 output: github_document
 ---
 
-<!-- README is generated from README.Rmd, edit ONLY this file if needed. But, after you edit it, you need to knit it in order to create the new README.md, which is the thing which is actually used. -->
+<!-- README is generated from README.Rmd, edit ONLY this file if needed. But, after you edit it, you NEED TO KNIT IT BY HAND in order to create the new README.md, which is the thing which is actually used. -->
 
-```{r, include = FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(
   collapse = T,
@@ -17,9 +17,12 @@ knitr::opts_chunk$set(
 
 ```
 
-# Data for *Preceptor's Primer for Bayesian Data Science*
 
-`PPBDS.data` provides the data used in *[Preceptor's Primer for Bayesian Data Science](https://davidkane9.github.io/PPBDS/)*, the textbook used in [Gov 50: Data](https://www.davidkane.info/files/gov_50_fall_2020.html) at Harvard University. 
+# Data for *Preceptor's Primer for <br/> Bayesian Data Science* <img src="man/figures/ulysses_hex_black.png" align = "right"  width="160">
+
+## About this package
+
+`PPBDS.data` provides the data and tutorials used in *[Preceptor's Primer for Bayesian Data Science](https://davidkane9.github.io/PPBDS/)*, the textbook used in [Gov 50: Data](https://www.davidkane.info/files/gov_50_fall_2020.html) at Harvard University. 
 
 <!-- unsure if badges are available for use yet here -->
 
@@ -28,8 +31,13 @@ knitr::opts_chunk$set(
 As this package is not released on CRAN, you must install it directly from GitHub.
 
 ```r
-library(remotes)
 remotes::install_github("davidkane9/PPBDS.data")
+```
+
+In order to run these tutorials, you must install the [learnrhash](https://github.com/rundel/learnrhash) package, created by Colin Rundel. 
+
+```r
+remotes::install_github("rundel/learnrhash")
 ```
 
 ## Loading Preceptor's Data
@@ -37,7 +45,7 @@ remotes::install_github("davidkane9/PPBDS.data")
 After installing the package, it loads as any package should.
 
 ```{r loading, message=F}
-library(tidyverse) # the tidyverse is your new best friend
+library(tidyverse) 
 library(PPBDS.data)
 
 qscores
@@ -64,6 +72,7 @@ qscores %>%
 <!-- DK: We need some comments explaining what this is doing and how we can replace it. Specifically, why place the figure in man/ rather than inst/? -->
 
 <img src= "man/figures/README-quick.plot-1.png" align="center" width="600">
+
 
 ## Citing PPBDS.data
 

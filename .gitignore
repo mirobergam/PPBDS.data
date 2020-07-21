@@ -22,11 +22,10 @@
 
 # Then commands associated with the tutorials.
 
+inst/tutorials/*/*html
 inst/tutorials/*/*_files/
 
 # Then some stragglers.
-
-docs
 
 data-raw/anes_timeseries_cdf.dta
 
