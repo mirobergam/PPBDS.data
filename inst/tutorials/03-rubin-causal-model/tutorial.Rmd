@@ -156,13 +156,13 @@ question("Which of the following equations is incorrect?",
     answer("Y(t) - Y(c) = tau"), 
     answer("Y(c) = Y(t) - tau"),
     answer("Y(t) = Y(c) + tau"),
-    answer("Y(c) - Y(t) = tau", correct = TRUE, message = "Nice!")
+    answer("Y(c) - Y(t) = tau", correct = TRUE, message = "Nice!"),
     allow_retry = TRUE
   )
 
 ```
 
-```{r question-2-1-setup, echo = FALSE}
+```{r question-2-2-setup, echo = FALSE}
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
        ytreat = c("11", "13", "?", "?", "6"),
@@ -182,15 +182,15 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
 ```
 
 Do the math in the console to calculate for the ATE for the data given to you in this Preceptor Table.
-```{r question-2-1, exercise = TRUE}
+```{r question-2-2, exercise = TRUE}
 
 ```
 
-```{r question-2-1-hint, silent = TRUE}
+```{r question-2-2-hint, silent = TRUE}
  "Average of Treated Values" - "Average of Control Values"
 ```
 
-```{r question-2-2, exercise = TRUE}
+```{r question-2-3}
 
 quiz(
   question("Calculate the ATE based on the data given to you in this Preceptor Table.",
@@ -232,7 +232,7 @@ quiz(
 
 ```
 
-```{r question-2-3, exercise = TRUE}
+```{r question-2-4}
 
 quiz(
   question("Which of the following is NOT a reason why ATE-hat a useful estimand?",
@@ -262,21 +262,44 @@ quiz(
 
 ```{r question-3-1}
 
+quiz(
 question_text("In addition to not being able to observe counterfactal outcomes, what is another source of missing data in Preceptor Tables?",
     allow_retry = T,
     answer(NULL, correct = T)
+  ),
+question_text("In order to apply the causal effect of a sample to the general population, our samaple must be ______ of the population.",
+    allow_retry = T,
+    answer("representative", correct = T)
+  ),
+question_text("What is an Infinite Preceptor Table? Use the word 'assumption' in your answer.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+question_text("Is it fair to assume that the causal effect on Sam for now is the same as the causal effect on him in some amount of time? Explain why or why not.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+  question_text("Why might Infinite Preceptor Tables include additional treatment columns?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+  question_text("When you begin working on a causal question, it's best to begin with an Infinite Preceptor Table. What three steps do you take to narrow this table down?",
+    allow_retry = T,
+    answer(NULL, correct = T)
   )
+)
 
 ```
-
-
-
 
 ## Uncertainty and Confounding
 
 ```{r question-4-1}
 
 quiz(
+  question_text("Describe the two main forms of uncertainty with using ATE-hat as a uniform measure of causal effect.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
   question("Which of the following is NOT a good reason to doubt the certainty of your ATE?",
     answer("The ATE wasn't calculated using an equal number of control and treatment observations", correct = TRUE),
     answer("The sample used to calculate the ATE is too small"),
@@ -284,42 +307,67 @@ quiz(
     answer("The ATE doesn't account for individual variation in each observation"),
     allow_retry = TRUE
   ),
+  question("Which of the following would make the calculated ATE closer to the true ATE of a sample? (Select all that apply)",
+    answer("A truly random asssignment mechanism", correct = TRUE),
+    answer("Less variance in what is being measured", correct = TRUE),
+    answer("A larger sample", correct = TRUE),
+    answer("The individuals who were selected for interviews were disproportionately non-Spanish speakers."),
+    allow_retry = TRUE
+  ),
+  question_text("Explain what 'confounding' means in the context of an aassignment mechanism.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+  question_text("The trains experiment is redone so that everyone in a certain region of the train platform is treated and another region is not. Is this a confounding element? Why?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
   question("In the context of the trains dataset, which of the following describes selection bias, a key problem to avoid when establishing an assignment mechanism?",
     answer("The study selected a specific train station rather than measuring the effect across many"),
     answer("Spanish speakers do not choose which platforms to sit on randomly despite the assignment mechanism assuming so", correct = TRUE),
     answer("The individuals who were selected for interviews were disproportionately non-Spanish speakers."),
-    allow_retry = TRUE
-  ),
-  question("Which of the following would make the calculated ATE closer to the true ATE of a sample? (Select all that apply)",
-    answer("A truly random asssignment mechanism", correct = TRUE),
-    answer("An equal number of control and treatment observations in the sample"),
-    answer("Less variance in what is being measured", correct = TRUE),
-    answer("A larger sample", correct = TRUE),
-    answer("The individuals who were selected for interviews were disproportionately non-Spanish speakers."),
-    allow_retry = TRUE
-  ),
-  question("Which of the following would make the calculated ATE closer to the true ATE of a sample? (Select all that apply)",
-    answer("A truly random asssignment mechanism", correct = TRUE),
-    answer("An equal number of control and treatment observations in the sample"),
-    answer("Less variance in what is being measured", correct = TRUE),
-    answer("A larger sample", correct = TRUE),
-    answer("The individuals who were selected for interviews were disproportionately non-Spanish speakers."),
-    allow_retry = TRUE
-  ),
-  question("Which of the following would make the calculated ATE closer to the true ATE of a sample? (Select all that apply)",
-    answer("A truly random asssignment mechanism", correct = TRUE),
-    answer("An equal number of control and treatment observations in the sample"),
-    answer("Less variance in what is being measured", correct = TRUE),
-    answer("A larger sample", correct = TRUE),
     allow_retry = TRUE
   )
 )
 
 ```
 
+```{r question-4-2-setup}
+
+tibble(platforms = c("Platform 1", "Platform 2", "Platform 3"),
+       control = c("25", "25", "25"), 
+       treated = c("25", "25", "25")) %>%
+gt() %>%
+  cols_label(platforms = "Blocks",
+                control = "Control",
+                treated = "Treated") %>%
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = vars(platforms))) %>%
+  tab_style(cell_text(weight = "bold"),
+            location = cells_body(columns = vars(platforms))) %>%
+  cols_align(align = "center", columns = TRUE)
+
+```
+
+```{r question-4-2}
+
+question_text("Describe how a block random assignment would work in the context of the trains experiment using names and numbers from the table above.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  )
+
+question_text("A few of the platforms in the station are too loud for the Spanish-speakers to be heard by those around them. How might this jeopardize randomization and serve as a confounding factor?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  )
+
+```
+
+<!-- Questions about Permutation test section? Cass said she wasn't finished with it yet. -->
+
 The following model uses party as an explanatory variable for age. Displayed is a Preceptor Table showing the outcome variable for this model, age. 
 
-```{r question-4-2-setup}
+```{r question-4-3-setup}
 
 lm(data = trains, age ~ party - 1)
 
@@ -336,13 +384,19 @@ tibble(subject = c("1", "2", "...", "55", "...", "204", "205", "...", "1,627", "
 
 ```
 
-```{r question-4-2}
+```{r question-4-3}
 
+quiz(
 question("Is this model predictive or causal?",
     answer("Causal"),
     answer("Predictive", correct = TRUE),
     allow_retry = TRUE
+  ),
+question_text("Explain your answer above.",
+    allow_retry = T,
+    answer(NULL, correct = T)
   )
+)
 
 ```
 
