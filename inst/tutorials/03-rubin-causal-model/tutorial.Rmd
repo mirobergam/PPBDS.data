@@ -202,8 +202,16 @@ quiz(
     answer("An equal number of control and treatment observations in the sample"),
     answer("Less variance in what is being measured", correct = TRUE),
     answer("A larger sample", correct = TRUE),
+    answer("The individuals who were selected for interviews were disproportionately non-Spanish speakers."),
     allow_retry = TRUE
-)
+  ),
+  question("Which of the following would make the calculated ATE closer to the true ATE of a sample? (Select all that apply)",
+    answer("A truly random asssignment mechanism", correct = TRUE),
+    answer("An equal number of control and treatment observations in the sample"),
+    answer("Less variance in what is being measured", correct = TRUE),
+    answer("A larger sample", correct = TRUE),
+    allow_retry = TRUE
+  )
 )
 
 ```
