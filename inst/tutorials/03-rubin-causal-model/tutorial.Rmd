@@ -363,11 +363,117 @@ question_text("A few of the platforms in the station are too loud for the Spanis
 
 ```
 
-<!-- Questions about Permutation test section? Cass said she wasn't finished with it yet. -->
+```{r question-4-3-setup, echo = FALSE}
+
+tibble(Permutation = c("#1", "#2", "#3", "#4", "#5", "#6"),
+       `13` = c("T", "T", "T", "C", "C", "C"),
+       `11` = c("T", "C", "C", "T", "T", "C"),
+       `10` = c("C", "T", "C", "T", "C", "T"),
+       `12 ` = c("C", "C", "T", "C", "T", "T"),
+       ATE = c("+1", "0", "+2", "-2", "0", "-1")) %>%
+       
+  # Then, we use the gt function to make it pretty
+  
+  gt() %>%
+  cols_label(Permutation = md("**Permutation**")) %>%
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = vars(Permutation))) %>%
+  tab_style(cell_text(weight = "bold"),
+            location = cells_body(columns = vars(Permutation))) %>%
+  cols_align(align = "center", columns = TRUE)
+
+```
+
+```{r question-4-3}
+
+quiz(
+question_text("What does row #1 represent? What do rows #2-6 represent?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+question_text("What is the purpose of a permutation test? Why does it make sense to reassign treatment and control in every permutation?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+question_text("What does the variation in the final column tell us about ATE?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  )
+)
+
+```
+
+```{r question-4-4}
+
+quiz(
+  question("What is external validity?",
+    answer("The data we are collecting is a legitimate measure of what we are trying to observe"),
+    answer("The population used in the study is representative of the population we hope to generalize the findings to", correct = TRUE),
+    answer("It is when the findings of a study affirm what is already known in exisiting literature"),
+    allow_retry = TRUE
+  ),
+  question_text("What is the Hawthorne effect?",
+      allow_retry = T,
+      answer(NULL, correct = T)
+  )
+)
+
+```
+
+```{r question-4-5-setup, echo=FALSE}
+
+tibble(subject = c("Jessica", "Miro"),
+       ytreat = c("?", "?"),
+       ycontrol = c("4", "13"),
+       ydiff = c("-1.33", "-1.33")) %>%
+  gt() %>%
+  cols_label(subject = md("$$\\mathbf{Subject}$$"),
+                ytreat = md("$$Y_t(u)$$"),
+                ycontrol = md("$$Y_c(u)$$"),
+                ydiff = md("$$Y_t(u) - Y_c(u)$$")) %>%
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = vars(subject))) %>%
+  tab_style(cell_text(weight = "bold"),
+            location = cells_body(columns = vars(subject))) %>%
+  cols_align(align = "center", columns = TRUE) %>%
+  fmt_markdown(columns = TRUE)
+
+```
+
+```{r question-4-5}
+
+quiz(
+  question_text("What is Miro's Y(treatment) after applying the treatment effect?",
+    answer("11.67", correct = TRUE),
+    allow_retry = TRUE
+  ),
+  question_text("What is Jessica's Y(treatment) after applying the treatment effect?",
+    answer("2.67", correct = TRUE),
+    allow_retry = TRUE
+  ),
+  question("Which of the two went go off the scale of 3-15 after applying the treatment effect?",
+    answer("Miro"),
+    answer("Jessica", correct = TRUE),
+    allow_retry = TRUE
+  ),
+  question_text("What is the censoring in statistics?",
+      allow_retry = T,
+      answer(NULL, correct = T)
+  ),
+  question_text("If many of the observations were as low as Jessica's, is it the problem of the scale in the study? Why?",
+      allow_retry = T,
+      answer(NULL, correct = T)
+  )
+)
+
+```
+
+
+
 
 The following model uses party as an explanatory variable for age. Displayed is a Preceptor Table showing the outcome variable for this model, age. 
 
-```{r question-4-3-setup}
+```{r question-4-6-setup}
 
 lm(data = trains, age ~ party - 1)
 
@@ -384,7 +490,7 @@ tibble(subject = c("1", "2", "...", "55", "...", "204", "205", "...", "1,627", "
 
 ```
 
-```{r question-4-3}
+```{r question-4-6}
 
 quiz(
 question("Is this model predictive or causal?",
