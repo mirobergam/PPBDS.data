@@ -67,6 +67,18 @@ question("What is the R version running on your computer?",
 
 ```
 
+Open response is a third type of question in tutorials. Type in the version of R that your computer is running. If your answer is not `4.0.1`, the question will tell you that you are incorrect and allow you to try again.
+```{r question-1-4}
+
+question_text(
+    "What version of R is your computer running?",
+    allow_retry = T,
+    answer("4.0.1", correct = T)
+  )
+
+```
+
+
 ### Exercise 3
 
 At this point, we want to know if your machine saves your progress on tutorials. Close your tutorial and restart your R session, then open up this tutorial again. Was your progress on exercises 1 and 2 saved? If not, ask for help on setting up tutorials.
@@ -74,11 +86,11 @@ At this point, we want to know if your machine saves your progress on tutorials.
 ### Exercise 4
 Now, we are going to load our first dataset. We've already loaded the PPBDS.data in the package -- this is the package our dataset will come from. Type `trains` in the console and hit "Run Code". This should display some observations from the trains dataset. 
 
-```{r question-1-4, exercise = TRUE}
+```{r question-1-5, exercise = TRUE}
 library(PPBDS.data)
 ```
 
-```{r question-1-4-hint, silent = TRUE}
+```{r question-1-5-hint, silent = TRUE}
 trains
 ```
 
@@ -86,11 +98,11 @@ trains
 
 ### Exercise 5
 Check if your computer is set to download R packages in binary by typing in `options("pkgType")`. Does it say binary?
-```{r question-1-5, exercise = TRUE}
+```{r question-1-6, exercise = TRUE}
 
 ```
 
-```{r question-1-5-hint, silent = TRUE}
+```{r question-1-6-hint, silent = TRUE}
 options("pkgType")
 ```
 
