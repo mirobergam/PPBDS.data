@@ -29,15 +29,13 @@ knitr::include_graphics("images/don_rubin.jpg", dpi = 100)
 question_text(
   "Student Name:",
   answer(NULL, correct = TRUE),
-  incorrect = "Ok",
-  try_again_button = "Modify your answer",
   allow_retry = TRUE
 )
 ```
 
 ## What is a causal effect?
 
-Answer the following questions about this Ideal Preceptor Table.
+Answer some questions about causal inference.
 
 ```{r question-1-1}
 
@@ -63,6 +61,8 @@ question("What is $Y$? (Multi-response question with 2 right answers!)", type = 
 
 ```
 
+Answer the following questions about this Ideal Preceptor Table.
+
 ```{r question-1-2-setup, echo = FALSE}
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -84,6 +84,11 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
 
 ```{r question-1-2}
 quiz(
+  question_text(
+    "In your own words, what is a Preceptor Table?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
   question("What is the casual effect of the treatment on Yao?",
     answer("-2"),
     answer("+9"),
@@ -108,16 +113,39 @@ quiz(
     allow_retry = TRUE
   ),
   question("What was the treatment effect percentage on Diego?",
-    answer("Tahmid"),
-    answer("Diego"),
-    answer("Cassidy"),
-    answer("Emma"),
-    answer("Yao", correct = TRUE),
+    answer("-40%"),
+    answer("-60%"),
+    answer("+60%"),
+    answer("-50%"),
+    answer("+50%", correct = TRUE),
     allow_retry = TRUE
   )
 )
 
 ```
+
+We are only able to calculate the true average treatment effect for this sample of individuals because this is an Ideal Preceptor Table, which includes all of the observed and counterfactual values. In reality, we wouldn't be able to get both the treatment and control outcomes for any single individual.  
+Do the math in the console to calculate for the ATE for the data given to you in this Preceptor Table. Use the output to answer the following question.
+```{r question-2-1, exercise = TRUE}
+
+```
+
+```{r question-2-1-hint, silent = TRUE}
+ "Average of Treated Values" - "Average of Control Values"
+```
+
+```{r question-1-3}
+
+question("What is the ATE of this sample?",
+    answer("+1"),
+    answer("+0.8", correct = TRUE),
+    answer("-0.8"),
+    answer("-1"),
+    allow_retry = TRUE
+  )
+
+```
+
 
 ## How do we fill in the missing values?
 
