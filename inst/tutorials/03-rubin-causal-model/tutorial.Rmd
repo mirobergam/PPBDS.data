@@ -119,6 +119,10 @@ quiz(
     answer("-50%"),
     answer("+50%", correct = TRUE),
     allow_retry = TRUE
+  ),
+  question_text("Define an estimand in your own words.",
+    allow_retry = T,
+    answer(NULL, correct = T)
   )
 )
 
@@ -136,12 +140,10 @@ Do the math in the console to calculate for the ATE for the data given to you in
 
 ```{r question-1-4}
 
-question("What is the ATE of this sample?",
-    answer("+1"),
-    answer("+0.8", correct = TRUE),
-    answer("-0.8"),
-    answer("-1"),
-    allow_retry = TRUE
+question_text(
+    "What is the ATE of this sample?",
+    allow_retry = T,
+    answer("+0.8", correct = T)
   )
 
 ```
@@ -188,7 +190,7 @@ Do the math in the console to calculate for the ATE for the data given to you in
  "Average of Treated Values" - "Average of Control Values"
 ```
 
-```{r question-2-2}
+```{r question-2-2, exercise = TRUE}
 
 quiz(
   question("Calculate the ATE based on the data given to you in this Preceptor Table.",
@@ -198,25 +200,77 @@ quiz(
     answer("+2"),
     allow_retry = TRUE
   ),
-  question("What would be Cassidy's treated value be after applying the ATE?",
-    answer("11.5"),
-    answer("10.5", correct = TRUE),
-    answer("11"),
-    answer("10"),
+  question_text("What would be Cassidy's treated value be after applying the ATE?",
+    allow_retry = T,
+    answer("10.5", correct = T)
+  ),
+  question_text("What would be Tahmid's treated value be after applying the ATE?",
+    allow_retry = T,
+    answer("9.5", correct = T)
+  ),
+  question_text(
+    "What is the treatment effect for the males in the sample?",
+    allow_retry = T,
+    answer("-1.5", correct = T)
+  ),
+  question_text(
+    "What is the treatment effect for the females in the sample?",
+    allow_retry = T,
+    answer("+2", correct = T)
+  ),
+  question_text(
+    "Solve for Diego's Y(control) using the treatment effect for males",
+    allow_retry = T,
+    answer("7.5", correct = T)
+  ),
+  question_text(
+    "Solve for Emma''s Y(treatment) using the treatment effect for females",
+    allow_retry = T,
+    answer("13", correct = T)
+  )
+)
+
+```
+
+```{r question-2-3, exercise = TRUE}
+
+quiz(
+  question("Which of the following is NOT a reason why ATE-hat a useful estimand?",
+    answer("It captures a clear and useful estimator"),
+    answer("If the treatment is randomly assigned, the estimator is unbiased"),
+    answer("You can use to fill out Preceptor Table if you assume the treatment effect is the same for everyone"),
+    answer("ATE-hat always captures the correct sign (+ or -) of the true ATE", correct = TRUE),
     allow_retry = TRUE
   ),
-  question("What is the treatment effect for the males in the sample?",
-    answer("+2"),
-    answer("-2"),
-    answer("-1.5", correct = TRUE),
-    answer("+1.5"),
-    allow_retry = TRUE
+  question_text("Define ATE-hat and describe how it is different than ATE.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+  question_text("Describe heterogeneous treatment effect for individual variation.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+  question_text("Describe heterogeneous treatment effect for group variation.",
+    allow_retry = T,
+    answer(NULL, correct = T)
   )
 )
 
 ```
 
 ## Missing Data
+
+```{r question-3-1}
+
+question_text("In addition to not being able to observe counterfactal outcomes, what is another source of missing data in Preceptor Tables?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  )
+
+```
+
+
+
 
 ## Uncertainty and Confounding
 
