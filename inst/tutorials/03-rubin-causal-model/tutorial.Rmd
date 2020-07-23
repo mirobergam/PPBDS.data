@@ -8,6 +8,8 @@ runtime: shiny_prerendered
 description: "Chapter 3 tutorial"
 ---
 
+<!-- MB: HOW TO ADD WHITESPACE for paragraph submissions?? -->
+
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(learnr)
@@ -44,21 +46,13 @@ question("What is the Fundamental Problem of Causal Inference?",
     allow_retry = TRUE
   ),
 
-question("How do we estimate causal effect?",
-    answer("Observe someone's potential outcome under treatment and compare it to their potential outcome as control.", message = "Remember the Fundamental Problem of Causal Inference is that we cannot *observe* both potential outcomes, but you're on the right track."),
-    answer("Only through lots of complicated coding.", message = "We can describe the process of finding the causal effect without any real code!"),
-    answer("Find the difference between potential outcomes under treatment and potential outcomes under control.", correct = TRUE),
-    allow_retry = TRUE
-  ),
-
-question("What is $Y$? (Multi-response question with 2 right answers!)", type = "multiple",
-    answer("Response variable", correct = TRUE),
-    answer("The variable we want to explain through experimentation", correct = TRUE),
-    answer("Causal Effect", message = "Not quite!" ),
-    allow_retry = TRUE
+question_text(
+    "In your own words, what is a 'counterfactual'?",
+    allow_retry = T,
+    trim = FALSE,
+    answer(NULL, correct = T)
   )
 )
-
 ```
 
 Answer the following questions about this Ideal Preceptor Table.
@@ -97,7 +91,7 @@ question("What is the casual effect of the treatment on Yao?",
     answer("-9"),
     allow_retry = TRUE
   ),
-question("How many of these people experienced a positive causal effect?",
+question("For how many of the five is the casual effect of the treatment positive?",
     answer("1"),
     answer("2"),
     answer("3", correct = TRUE),
@@ -106,11 +100,7 @@ question("How many of these people experienced a positive causal effect?",
     allow_retry = TRUE
   ),
 question("On whom did the treatment have the most negative causal effect?",
-    answer("Tahmid", correct = TRUE),
-    answer("Diego"),
-    answer("Cassidy"),
-    answer("Emma"),
-    answer("Yao"),
+    answer("Tahmid", correct = T),
     allow_retry = TRUE
   ),
 question("What was the treatment effect percentage on Diego?",
@@ -130,7 +120,7 @@ question_text("Define an estimand in your own words.",
 ```
 
 We are only able to calculate the true average treatment effect for this sample of individuals because this is an Ideal Preceptor Table, which includes all of the observed and counterfactual values. In reality, we wouldn't be able to get both the treatment and control outcomes for any single individual.  
-Do the math in the console to calculate for the ATE for the data given to you in this Preceptor Table. Use the output to answer the following question.
+The console has provided for your convenience to solve for the ATE of this sample. Nothing you type in the console will be graded.
 ```{r question-1-3, exercise = TRUE}
 
 ```
@@ -159,10 +149,10 @@ Answer the following questions.
 
 quiz(
 question("Which of the following equations is incorrect?",
-    answer("Y(t) - Y(c) = tau"), 
-    answer("Y(c) = Y(t) - tau"),
-    answer("Y(t) = Y(c) + tau"),
-    answer("Y(c) - Y(t) = tau", correct = TRUE, message = "Nice!"),
+    answer("$Y_t(u) - Y_c(u) = \tau$"), 
+    answer("$Y_c(u) = Y_t(u) - \tau$"),
+    answer("$Y_t(u) = Y_c(u) + \tau$"),
+    answer("$Y_c(u) - Y_t(u) = \tau$", correct = TRUE, message = "Nice!"),
     allow_retry = TRUE
   )
 )
@@ -186,9 +176,10 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
             location = cells_body(columns = vars(subject))) %>%
   cols_align(align = "center", columns = TRUE) %>%
   fmt_markdown(columns = TRUE)
+
 ```
 
-Do the math in the console to calculate for the ATE for the data given to you in this Preceptor Table.
+The console has provided for your convenience to solve for the ATE of this sample. Once again, nothing you type in the console will be graded.
 ```{r question-2-2, exercise = TRUE}
 
 ```
@@ -226,12 +217,12 @@ question_text(
     answer("+2", correct = T)
   ),
 question_text(
-    "Solve for Diego's Y(control) using the treatment effect for males",
+    "Solve for Diego's $Y_c(u)$ using the treatment effect for males",
     allow_retry = T,
     answer("7.5", correct = T)
   ),
 question_text(
-    "Solve for Emma''s Y(treatment) using the treatment effect for females",
+    "Solve for Emma''s $Y_t(u)$ using the treatment effect for females",
     allow_retry = T,
     answer("13", correct = T)
   )
@@ -303,6 +294,8 @@ question_text("When you begin working on a causal question, it's best to begin w
 ```
 
 ## Uncertainty and Confounding
+
+<!-- section of book so this must be updated to match -->
 
 Answer the following questions on uncertainty and confounding.
 
@@ -480,11 +473,11 @@ tibble(subject = c("Jessica", "Miro"),
 ```{r question-4-5-quiz}
 
 quiz(
-question_text("What is Miro's Y(treatment) after applying the treatment effect?",
+question_text("What is Miro's $Y_t(u)$ after applying the treatment effect?",
     answer("11.67", correct = TRUE),
     allow_retry = TRUE
   ),
-question_text("What is Jessica's Y(treatment) after applying the treatment effect?",
+question_text("What is Jessica's $Y_t(u)$  after applying the treatment effect?",
     answer("2.67", correct = TRUE),
     allow_retry = TRUE
   ),
@@ -493,7 +486,7 @@ question("Which of the two went go off the scale of 3-15 after applying the trea
     answer("Jessica", correct = TRUE),
     allow_retry = TRUE
   ),
-question_text("What is the censoring in statistics?",
+question_text("Write a few sentences describing censoring in statistics?",
       allow_retry = T,
       answer(NULL, correct = T)
   ),
