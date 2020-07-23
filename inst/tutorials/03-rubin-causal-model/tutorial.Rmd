@@ -10,6 +10,7 @@ description: "Chapter 3 tutorial"
 
 <!-- MB: Cannot add white space to paragraph answers -->
 <!-- MB: Submissions say "OK" instead of "incorrect". -->
+<!-- MB: ATE hat in math notation throws an error everytime -->
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -450,7 +451,7 @@ question_text("What does the variation in the final column tell us about the rel
 
 ```
 
-Answer the following questions on external validity, scale, and humility.
+Answer the following questions on validity, scale, and humility.
 
 ```{r question-4-4-quiz}
 
@@ -481,7 +482,7 @@ question_text("In the train experiment, there were people in the experiement who
     allow_retry = TRUE,
     incorrect = "Ok"
   ),
-question_text("Humility is a key step in modelling and data analysis where we acknowledge all of the things in the real world that may have messed up our experiment or predictions. Use humility and discuss one of these things in a few sentences.", # MB: CASS
+question_text("Humility is a key step in modelling and data analysis where we acknowledge all of the things in the real world that may have messed up our experiment or predictions. Use humility and discuss one of these things in a few sentences.", # MB: CASS. examples: headphgones in couldnt hear spanish, etc
       allow_retry = T,
       answer(NULL, correct = T),
     incorrect = "Ok"
@@ -569,7 +570,7 @@ tibble(subject = c("1", "2", "...", "55", "...", "204", "205", "...", "1,627", "
 
 ```{r question-4-6-quiz}
 
-# MB: Cass. Talk about the math at this point. Any mathmathical thing stops at the first eq. Redo formnula to annotate.
+# MB: Cass. Talk about the math at this point. Any mathmathical thing stops at the first eq. Redo formnula to annotate. FORMULA IS THE SAME. use equation, then replace variables with words
 
 quiz(
 question("Is this model predictive or causal?",
