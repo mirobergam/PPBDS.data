@@ -490,14 +490,16 @@ question_text("Humility is a key step in modelling and data analysis where we ac
 
 ```
 
-<!-- MB: Rework this. Do weight loss example instead. Add more people? Whether or not the out of bounds number is possible vs impossible is another thing. Introduce the table better-->
+<!-- MB: Reworked so that the out of bounds number is possible rather. The OOB being impossible is another matter.-->
+
+Miro and Jessica are two mice being given a weight-increasing drug with a causal effect of +2 oz. Miro weighs 13 oz and Jessica weighs 4 oz prior to treatment. However, their scale only goes up to 14 oz. 
 
 ```{r question-4-5-setup, echo=FALSE}
 
 tibble(subject = c("Jessica", "Miro"),
        ytreat = c("?", "?"),
        ycontrol = c("4", "13"),
-       ydiff = c("-1.5", "-1.5")) %>%
+       ydiff = c("+2", "+2")) %>%
   gt() %>%
   cols_label(subject = md("$$\\mathbf{Subject}$$"),
                 ytreat = md("$$Y_t(u)$$"),
@@ -512,28 +514,34 @@ tibble(subject = c("Jessica", "Miro"),
 
 ```
 
+Leave out units in all answers.
+
 ```{r question-4-5-quiz}
 
 quiz(
+  question_text("What is Jessica's $Y_t(u)$ assuming $Y_t(u) - Y_c(u)$ to be his treatment effect?",
+    answer("6", correct = TRUE),
+    allow_retry = TRUE
+  ),
 question_text("What is Miro's $Y_t(u)$ assuming $Y_t(u) - Y_c(u)$ to be his treatment effect?",
-    answer("11.67", correct = TRUE),
+    answer("15", correct = TRUE),
     allow_retry = TRUE
   ),
-question_text("What is Jessica's $Y_t(u)$ assuming $Y_t(u) - Y_c(u)$ to be his treatment effect?",
-    answer("2.67", correct = TRUE),
+question_text("What does Miro's scale say at the end of the experiment, assuming $Y_t(u) - Y_c(u)$ to be his treatment effect?",
+    answer("14", correct = TRUE),
     allow_retry = TRUE
   ),
-question("Which of the two went go off the scale of 3-15 after applying the treatment effect?",
-    answer("Miro"),
-    answer("Jessica", correct = TRUE),
+question("Which of the two went go off the scale after applying the treatment effect?",
+    answer("Miro", correct = TRUE),
+    answer("Jessica"),
     allow_retry = TRUE
   ),
-question_text("Write a few sentences describing censoring in statistics?",
+question_text("Write a few sentences describing censoring in statistics.",
       allow_retry = T,
       answer(NULL, correct = T),
     incorrect = "Ok"
   ),
-question_text("If many of the observations were as low as Jessica's, is it the problem of the scale in the study? Why?",
+question_text("If many of the observations were as high as Miro's, is it the problem of the scale in the study? Why?",
       allow_retry = T,
       answer(NULL, correct = T),
     incorrect = "Ok"
