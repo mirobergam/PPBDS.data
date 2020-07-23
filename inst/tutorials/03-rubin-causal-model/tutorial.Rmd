@@ -194,11 +194,19 @@ question("Calculate the ATE based on the data given to you in this Preceptor Tab
     answer("+2"),
     allow_retry = TRUE
   ),
-question_text("What is Cassidy's outcome under treatment if we assume the causal value to be ATE?",
+question_text("Before assigning any number to our causal effect, let's work using a single causal effect for everyone called $//tau$. What would be Yao's $Y_c(u)$ using $//tau$ in your answer. You can write tau for $//tau$. Don't put spaces in your answer",
+    allow_retry = T,
+    answer("13-tau", correct = T)
+  ),
+question_text("Using the same format, what would be Cassidy's $Y_t(u)$.",
+    allow_retry = T,
+    answer("10+tau", correct = T)
+  ),
+question_text("What is Cassidy's outcome under treatment if we assume tau to be the ATE we calculated?",
     allow_retry = T,
     answer("10.5", correct = T)
   ),
-question_text("What is Tahmid's outcome under treatment if we assume the causal value to be ATE?",
+question_text("What is Tahmid's outcome under treatment if we assume tau to be the ATE we calculated?",
     allow_retry = T,
     answer("9.5", correct = T)
   ),
@@ -285,7 +293,7 @@ question_text("Why might Infinite Preceptor Tables include additional treatment 
     allow_retry = T,
     answer(NULL, correct = T)
   ),
-question_text("When you begin working on a causal question, it's best to begin with an Infinite Preceptor Table. What three steps do you take to narrow this table down?",
+question_text("When you begin working on a causal question, one begins with the idea of an Infinite Preceptor Table. What three assumptions do you make to narrow this idea down to a Preceptor Table you can work with?",
     allow_retry = T,
     answer(NULL, correct = T)
   )
@@ -295,11 +303,13 @@ question_text("When you begin working on a causal question, it's best to begin w
 
 ## Uncertainty and Confounding
 
-<!-- section of book so this must be updated to match -->
+<!-- MB: section of book so this must be updated to match. Needs to focus less on parameter uncertainty and more on the perfect doctor idea -- you never know if you are assigning the treatments to a truly random selection of people  -->
 
 Answer the following questions on uncertainty and confounding.
 
 ```{r question-4-1-quiz}
+
+## MB: This question is bad, but based directly in the chapter. Keep? 
 
 quiz(
 question_text("Describe the two main forms of uncertainty with using ATE as a uniform measure of causal effect.",
@@ -313,14 +323,14 @@ question("Which of the following is NOT a good reason to doubt the certainty of 
     answer("The ATE doesn't account for individual variation in each observation"),
     allow_retry = TRUE
   ),
-question("Which of the following would make the calculated ATE closer to the true ATE of a sample? (Select all that apply)",
+question("Which of the following would make the $\widehat{ATE}$ of a sample closer to the true ATE of a sample? (Select all that apply)",
     answer("A truly random asssignment mechanism", correct = TRUE),
     answer("Less variance in what is being measured", correct = TRUE),
     answer("A larger sample", correct = TRUE),
     answer("The individuals who were selected for interviews were disproportionately non-Spanish speakers."),
     allow_retry = TRUE
   ),
-question_text("Explain what 'confounding' means in the context of an aassignment mechanism.",
+question_text("Explain what 'confounding' means in the context of an assignment mechanism.",
     allow_retry = T,
     answer(NULL, correct = T)
   ),
@@ -440,12 +450,14 @@ question_text("What is the Hawthorne effect?",
 
 ```
 
+<!-- MB: Rework this. Do weight loss example instead. Add more people? Whether or not the out of bounds number is possible vs impossible is another thing. Introduce the table better-->
+
 ```{r question-4-5-setup, echo=FALSE}
 
 tibble(subject = c("Jessica", "Miro"),
        ytreat = c("?", "?"),
        ycontrol = c("4", "13"),
-       ydiff = c("-1.33", "-1.33")) %>%
+       ydiff = c("-1.5", "-1.5")) %>%
   gt() %>%
   cols_label(subject = md("$$\\mathbf{Subject}$$"),
                 ytreat = md("$$Y_t(u)$$"),
