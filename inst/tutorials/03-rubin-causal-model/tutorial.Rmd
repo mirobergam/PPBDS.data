@@ -9,6 +9,7 @@ description: "Chapter 3 tutorial"
 ---
 
 <!-- MB: HOW TO ADD WHITESPACE for paragraph submissions?? -->
+<!-- MB: How to not say submisions are incorrect -->
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -149,15 +150,17 @@ Answer the following questions.
 
 quiz(
 question("Which of the following equations is incorrect?",
-    answer("$Y_t(u) - Y_c(u) = \tau$"), 
-    answer("$Y_c(u) = Y_t(u) - \tau$"),
-    answer("$Y_t(u) = Y_c(u) + \tau$"),
-    answer("$Y_c(u) - Y_t(u) = \tau$", correct = TRUE, message = "Nice!"),
+    answer("$Y_t(u) - Y_c(u) = \\tau$"), 
+    answer("$Y_c(u) = Y_t(u) - \\tau$"),
+    answer("$Y_t(u) = Y_c(u) + \\tau$"),
+    answer("$Y_c(u) - Y_t(u) = \\tau$", correct = TRUE, message = "Nice!"),
     allow_retry = TRUE
   )
 )
 
 ```
+
+<!-- MB: This table won't show up for some reason? -->
 
 ```{r question-2-2-setup, echo = FALSE}
 
@@ -198,11 +201,11 @@ question("Calculate the ATE based on the data given to you in this Preceptor Tab
     answer("+2"),
     allow_retry = TRUE
   ),
-question_text("What would be Cassidy's treated value be after applying the ATE?",
+question_text("What is Cassidy's outcome under treatment if we assume the causal value to be ATE?",
     allow_retry = T,
     answer("10.5", correct = T)
   ),
-question_text("What would be Tahmid's treated value be after applying the ATE?",
+question_text("What is Tahmid's outcome under treatment if we assume the causal value to be ATE?",
     allow_retry = T,
     answer("9.5", correct = T)
   ),
@@ -217,12 +220,12 @@ question_text(
     answer("+2", correct = T)
   ),
 question_text(
-    "Solve for Diego's $Y_c(u)$ using the treatment effect for males",
+    "What is Diego's $Y_c(u)$ if we assume his causal effect to be the treatment effect for males",
     allow_retry = T,
     answer("7.5", correct = T)
   ),
 question_text(
-    "Solve for Emma''s $Y_t(u)$ using the treatment effect for females",
+    "What is Emma's $Y_t(u)$ if we assume her causal effect to be the treatment effect for females",
     allow_retry = T,
     answer("13", correct = T)
   )
@@ -246,11 +249,11 @@ question_text("Define ATE-hat and describe how it is different than ATE.",
     allow_retry = T,
     answer(NULL, correct = T)
   ),
-question_text("Describe heterogeneous treatment effect for individual variation.",
+question_text("Describe the heterogeneous treatment effect for the variation between individuals.",
     allow_retry = T,
     answer(NULL, correct = T)
   ),
-question_text("Describe heterogeneous treatment effect for group variation.",
+question_text("Describe heterogeneous treatment effect for the variation between different sub-groups or variables.",
     allow_retry = T,
     answer(NULL, correct = T)
   )
@@ -273,7 +276,11 @@ question_text("In order to apply the causal effect of a sample to the general po
     allow_retry = T,
     answer("representative", correct = T)
   ),
-question_text("What is an Infinite Preceptor Table? Use the word 'assumption' in your answer.",
+question_text("Explain representativeness as a concept in sampling.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+question_text("Describe an Infinite Preceptor Table in a few sentences. Use the word 'assumption' in your answer.",
     allow_retry = T,
     answer(NULL, correct = T)
   ),
@@ -338,33 +345,19 @@ question("In the context of the trains dataset, which of the following describes
 
 ```
 
-Answer the following questions based on this table of block randomized assignment.
-
-```{r question-4-2-setup}
-
-tibble(platforms = c("Platform 1", "Platform 2", "Platform 3"),
-       control = c("25", "25", "25"), 
-       treated = c("25", "25", "25")) %>%
-gt() %>%
-  cols_label(platforms = "Blocks",
-                control = "Control",
-                treated = "Treated") %>%
-  tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = vars(platforms))) %>%
-  tab_style(cell_text(weight = "bold"),
-            location = cells_body(columns = vars(platforms))) %>%
-  cols_align(align = "center", columns = TRUE)
-
-```
+Answer the following questions about block randomized assignment.
 
 ```{r question-4-2-quiz}
 
 quiz(
-question_text("Describe how a block random assignment would work in the context of the trains experiment using names and numbers from the table above.",
+question_text("You are told to redo the train experiment using block randomized assignment. You have 150 commuters and the ability to sort them into 3 different platforms. How many commuters do you put on each of the 3 platforms and how many recieve the treatment?",
     allow_retry = T,
     answer(NULL, correct = T)
   ),
-
+question_text("Explain in a few sentences why a researcher may want to use block randomized assignment.",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
 question_text("A few of the platforms in the station are too loud for the Spanish-speakers to be heard by those around them. How might this jeopardize randomization and serve as a confounding factor?",
     allow_retry = T,
     answer(NULL, correct = T)
@@ -415,15 +408,19 @@ tibble(Permutation = c("#1", "#2", "#3", "#4", "#5", "#6"),
 ```{r question-4-3-quiz}
 
 quiz(
-question_text("What does row #1 represent? What do rows #2-6 represent?",
+question_text("Explain briefly how the row #1 represents the original observations in the table above.",
     allow_retry = T,
     answer(NULL, correct = T)
   ),
-question_text("What is the purpose of a permutation test? Why does it make sense to reassign treatment and control in every permutation?",
+question_text("What do rows #2 through #6 represent? Why do we need them to perform a permutation test?",
     allow_retry = T,
     answer(NULL, correct = T)
   ),
-question_text("What does the variation in the final column tell us about ATE?",
+question_text("In one sentence, what is the purpose of a permutation test?",
+    allow_retry = T,
+    answer(NULL, correct = T)
+  ),
+question_text("What does the variation in the final column tell us about the reliability of our ATE?",
     allow_retry = T,
     answer(NULL, correct = T)
   )
@@ -586,7 +583,7 @@ question_text("What is the causal effect of the treatment on Yao?",
     answer("-1", correct = T)
   ),
 
-question_text("What is the causal effect of Emma being treatment on Yao?",
+question_text("What is the causal effect of Emma being treated on Yao?",
     allow_retry = T,
     answer("-3", correct = T)
   )
