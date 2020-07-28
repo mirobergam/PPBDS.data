@@ -124,7 +124,7 @@ tibble(col_1 = c("Government and Data Science", "Preceptor and Primer")) %>%
   str()
 ```
 
-###
+### Baby chick weights
 
 Explore the `ChickWeight` dataset using `skim()`.
 
@@ -241,7 +241,7 @@ quiz(caption = "",
 )
 ```
 
-###
+### Annual GDP by country
 
 Let's reference the `gapminder` dataset. First, create a list-column named `gdpPercap_yearly` that lists the `gdpPercap` per year grouping by continent.
 
@@ -410,13 +410,14 @@ quiz(caption = "",
          allow_retry = TRUE))
 ```
 
+### Grading homework
+
 To make this real, put yourself in the shoes of a teacher: You've given your students 10 homework assignments and announced that you will drop their lowest homework score. Their final grade will be the average score of the remaining homeworks.
 
 To make your life easier, you want to write an R function that will take a vector of 10 homework scores and return a final grade. 
 
-1. Create a real R object (or set of objects) to use with your function
-
-* Create an object named `x` that contains the vector `c(100, 100, 100, 100, 100, 100, 100, 100, 100, 90)` (hint: use copy and paste!).  `x` will be the grades of your test student. 
+Create an object named `x` that contains the vector `c(100, 100, 100, 100, 100, 100, 100, 100, 100, 90)`.
+*`x` will be the grades of your test student. 
 
 ```{r obj, exercise = TRUE}
 ```
@@ -427,11 +428,7 @@ x <- c(100, 100, 100, 100, 100, 100, 100, 100, 100, 90)
 
 ###  
 
-2. Write code that works with the real object(s)
-
-* Recall the grading scheme: the final grade is the average homework score after you drop the lowest score. Since there are many ways to calculate this, let's be specific and end up on the same page.
-
-* Use `sum()`, `min()`, `/`, `9` and parentheses to calculate the final grade for student `x`.
+Use `sum()`, `min()`, `/`, `9` and parentheses to calculate the final grade for student `x`.
 
 ```{r make-x, echo = FALSE}
 x <- c(100, 100, 100, 100, 100, 100, 100, 100, 100, 90)
@@ -463,10 +460,6 @@ grade <- function() {
 
 At the moment, your `grade()` function is reusable but not _generalizable_. Each time you call `grade()` it computes the final grade of the vector `x` that contains `c(100, 100, 100, 100, 100, 100, 100, 100, 100, 90)`. We'd like to use `grade()` with new vectors that have new values.
 
-4. Assign the names of your real objects as argument names to the function.
-
-You can make a function generalizable by turning some of the objects in its code body into _formal arguments_, an object that a user can assign a value to when they call the function.
-
 Make `x` a formal argument.
 
 ```{r exercise-random-name, exercise=TRUE}
@@ -483,25 +476,29 @@ grade <- function(...) {
 
 ###   
 
-Good job! You can now have a finished `grade()` function that you can use to calculate the final grade of _any_ vector (I mean, student). Try it out.
-
-* Calculate the final grade of the vector `c(100, 90, 90, 90, 90, 90, 90, 90, 90, 80)`. 
-
-```{r make-grade}
+Calculate the final grade of the vector `c(100, 90, 90, 90, 90, 90, 90, 90, 90, 80)`. 
+```{r make-grade-setup}
 grade <- function(x) { 
   (sum(x) - min(x)) / 9
 }
 ```
 
-```{r function, exercise = TRUE, exercise.setup = "make-grade"}
+```{r make-grade, exercise = TRUE}
 ```
 
-```{r function-solution}
-grade(x = c(100, 90, 90, 90, 90, 90, 90, 90, 90, 80))
+```{r make-grade-hint}
+# Use the provided vector!
 ```
 
 ```{r recap}
 quiz(caption = "",
+     question("What is the final grade you calculated above?",
+              answer("91.11", correct = TRUE),
+              answer("90.00"),
+              answer("92.33"),
+              answer("89.91"),
+              random_answer_order = TRUE,
+              allow_retry = TRUE),
   question("Which is not a step of the best practice workflow for writing functions?",
          allow_retry = TRUE, random_answer_order = TRUE,
          answer("Create a real R object (or set of objects) to use with your function"),
@@ -526,35 +523,39 @@ question("Do you have a test vector that you can use?",
 
 ###
 
-* Write a piece of code that uses `max()` to double count the highest score in `x` and then takes the average of the 11 results.
+Write a piece of code that uses `max()` to double count the highest score in `x` and then takes the average of the 11 results.
 
 ```{r e3, exercise = TRUE, exercise.setup = "make-x"}
 x
 ```
 
 ```{r e3-hint}
-"Your code should retrun the answer 99.09091."
+(sum(x) + max(x)) / ...
 ```
 
-```{r e3-solution}
-(sum(x) + max(x)) / 11
-```
+###
 
-* Wrap your code in `function()` and save it to the name `grade2`.
-* Then define the argument(s) for the function.
+Wrap your code in `function()` and save it to the name `grade2`. Then define the argument(s) for the function.
 
 ```{r e4, exercise = TRUE}
 (sum(x) + max(x)) / 11
 ```
 
 ```{r e4-hint}
-"When you use this workflow, the names of the argument(s) are always the names of the object(s) that you created in step 1."
+grade2 <- function(x) {
+  ...
+}
 ```
 
-```{r e4-solution}
-grade2 <- function(x) {
-  (sum(x) + max(x)) / 11
-}
+```{r gradingquiz}
+quiz(caption = "",
+     question("What does grade2(x) return?",
+     answer("99.09", correct = TRUE),
+     answer("91.11"),
+     answer("95.45"),
+     answer("96.91"),
+     allow_retry = TRUE,
+     random_answer_order = TRUE))
 ```
 
 ### Functions using `runif()` and `rnorm()`
@@ -570,8 +571,6 @@ quiz(caption = "",
            answer("rnorm() has the following default values: n=1, mean=0, sd=1"),
            allow_retry = TRUE))
 ```
-
-###
 
 Write a custom function named `add_rvs()` that adds together 1 random variable generated by `runif()` and 1 random variable generated by `rnorm()`. Use `n=1` and the default values for the other arguments.
 
@@ -805,9 +804,7 @@ quiz(caption = "",
 
 ## Formal Testing
 
-### Checks using `stopifnot()`, and `stop()`
-
-<!-- EC: Need more stopifnot() questions, need testthat questions -->
+### Unit tests with `testthat`
 
 ```{r echo=TRUE, eval=FALSE}
 impatient_square <- function(x) {
@@ -845,7 +842,117 @@ quiz(caption = "",
          allow_retry = TRUE))
 ```
 
-### Combining Checks and Conditional Functions
+###
+
+This function is called `angry()`. Add a line of code that throws the message "Wrong! I am angry!" using `stop()`.
+
+```{r angry, exercise = TRUE}
+angry <- function(x) {
+  x
+}
+```
+
+```{r angry-hint}
+angry <- function(x) {
+  ...("Wrong! I am angry!")
+  x
+}
+```
+
+Nice, now we have an appropriately angry function that always yells at us. This isn't particularly useful. Make it so that `angry()` only yells at us if the x input is not a character. Also change the error message to something more useful: "x must be a character." This method is also known as the "if then stop".
+
+```{r ifthenstop, exercise = TRUE}
+angry <- function(x) {
+  x
+}
+```
+
+```{r ifthenstop-hint}
+angry <- function(x) {
+  if (!is.character(x)){
+    ...("x must be a character.")
+  }
+  x
+}
+```
+
+###
+
+What if we wanted to incorporate `testthat`? Use the `showfailure()` function to see what happens when we plug in `x = 1` to `angry()`.
+
+```{r showfailure-setup}
+library(testthat)
+angry <- function(x) {
+  if (!is.character(x)){
+    stop("x must be a character.")
+  }
+  x
+}
+```
+
+```{r showfailure, exercise = TRUE}
+show_failure(...)
+```
+
+```{r showfailure-hint}
+show_failure(angry(x=...))
+```
+
+Run the following function, which we've pre-defined behind the scenes.
+
+```{r mysteryfunc-setup}
+library(testthat)
+mystery <- function(x = 15) {
+  if (!is.numeric(x)){
+    stop("x must be a number.")
+  }
+  if (x <= 10){
+    stop("x must be greater than 10.")
+  }
+  if (x == 13){
+    stop("13 is an unlucky number. Choose a different number.")
+  }
+  sqrt(x)
+}
+```
+
+```{r mysteryfunc, exercise = TRUE}
+mystery()
+```
+
+```{r mysteryfunction}
+quiz(
+  question("Select all that apply. Which of the following happens when you run mystery()?",
+           answer("When you run mystery(13), you get an error that says: \"13 is an unlucky number. Choose a different number.\"", correct = TRUE),
+           answer("When you run mystery(), you get no error.", correct = TRUE),
+           answer("When you run mystery(10), you get no error"),
+           answer("When you run mystery(\"a\"), you get an error that says: \"x must be a number.\"", correct = TRUE),
+           allow_retry = TRUE))
+```
+
+```{r mysteryfunc2-setup, exercise.setup = "mysteryfunc-setup"}
+
+```
+
+```{r mysteryfunc2, exercise = TRUE}
+test_that('invalid args are detected', {
+  expect_error(mystery(-1))
+  expect_error(mystery(15))
+})
+```
+
+```{r mysteryfunction2}
+quiz(
+  question("When you run the following formal unit test, what do you get?",
+           answer("Nothing. This means the test worked as expected and no news is good news."),
+           answer("Error: Test failed: 'invalid args are detected' * `mystery(15)` did not throw an error.", correct = TRUE),
+           answer("Nothing. However, no result is a bad result and we have to peek under the hood further."),
+           answer("Error: Test failed: 'invalid args are detected' * `mystery(-1)` did not throw an error."),
+           allow_retry = TRUE,
+           random_answer_order = TRUE))
+```
+
+### Handling NAs
 
 ```{r if-quiz, echo = FALSE}
 question("Which describes `if`'s behavior? (Check all that apply).",
@@ -1113,7 +1220,9 @@ question("What will `clean(c(-99, 0, 1))` return?",
          allow_retry = TRUE)
 ```
 
-## Using custom and anonymous functions with `map_*` functions and list-columns
+## List-columns and`map_*` functions with custom and anonymous functions
+
+### Monthly temperatures
 
 Explore the `airquality` dataset using `skim()`.
 
@@ -1241,7 +1350,7 @@ quiz(
 )
 ```
 
-###
+### Coin Flipping
 
 Let's say you are trying to create a function, `coin_flip()`, that takes an input `n` of the number of times to flip a coin and adds up the number of Tails.
 
@@ -1502,44 +1611,10 @@ rvs <- tibble(trials = map(rep(3, 25), ...))
 
 ## Submit
 
-```{r encode, echo=FALSE}
-learnrhash::encoder_ui(
-  ui_before = shiny::div(
-    "When you have completed this tutorial, follow these steps:",
-        br(),
-    tags$ol(
-       tags$li("Click Generate Submission"),
-       tags$li("Copy and paste the hash generated into the \"Hash\" textbox"),
-       tags$li("Press 'Create responses.rds'. Nothing will pop up, but this will create an .rds file of your hashed responses."),
-       tags$li("Download the .rds file. A window will pop up asking you where to place the downloaded file. Upload this file to the appropriate Canvas assignment."))
-  )
-)
-```
-
 ```{r context="setup"}
-fluidPage(
-    mainPanel(
-          div(id = "form",
-            textInput("hash", "Hash", ""),
-            actionButton("submit", "Create responses.rds", class = "btn-primary"),
-            downloadButton("downloadData", "Download responses.rds")
-          )
-        )
-    )
+submission_ui
 ```
 
 ```{r context="server"}
-
-learnrhash::encoder_logic()
-
- observeEvent(input$submit,{
-        hash_id <<- input$hash
-        responses <<- data.frame("Hash" = hash_id)
- })
-output$downloadData <- downloadHandler(
-      filename = "tutorial_4_responses.rds",
-      content = function(file) {
-      write_rds(responses, file)
-    }
-  )
+submission_server()
 ```
